@@ -1,6 +1,5 @@
 import { Ingredient } from "../shared/ingredient.model";
 import { Subject } from "rxjs";
-import { NgForm } from "@angular/forms";
 
 export class ShoppingListService{
     ingredientsChanged = new Subject<Ingredient[]>();
