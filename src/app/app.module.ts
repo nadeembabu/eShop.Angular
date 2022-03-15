@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
-import { shoppingListReducer } from './shoppinglist/store/shoppinglist.reducer';
+import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { shoppingListReducer } from './shoppinglist/store/shoppinglist.reducer';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({shoppingList:shoppingListReducer}),
+    StoreModule.forRoot(fromApp.appReduer),
     AppRoutingModule,
     SharedModule,
     CoreModule
