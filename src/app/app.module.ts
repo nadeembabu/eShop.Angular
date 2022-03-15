@@ -12,6 +12,8 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
 import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import * as fromApp from './store/app.reducer';
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReduer),
+    EffectsModule.forRoot([AuthEffects]),
     AppRoutingModule,
     SharedModule,
     CoreModule
