@@ -34,6 +34,7 @@ export function authReducer(state=initialState,action:AuthActions.AuthActions){
             }
 
         case AuthActions.LOGIN_START:
+        case AuthActions.SIGNUP_START:
             return{
             ...state,
             authError:null,
@@ -47,6 +48,13 @@ export function authReducer(state=initialState,action:AuthActions.AuthActions){
                 authError:(<AuthActions.AuthenticateFail>action).payload,
                 loading:false
             }
+
+        case AuthActions.ClEAR_ERROR:
+            return{
+                ...state,
+                authError:null
+            }
+        
         default:
             return state;
     }
