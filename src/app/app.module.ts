@@ -6,7 +6,7 @@ import { StoreRouterConnectingModule} from '@ngrx/router-store'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
@@ -19,26 +19,18 @@ import { environment } from 'src/environments/environment';
 import { RecipeEffects } from './recipes/store/recipe.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    StoreModule.forRoot(fromApp.appReduer),
-    EffectsModule.forRoot([AuthEffects,RecipeEffects]),
-    StoreDevtoolsModule.instrument({logOnly:environment.production}),
-    StoreRouterConnectingModule.forRoot(),
-    AppRoutingModule,
-    SharedModule,
-    CoreModule
-  ],
-  providers: [LoggingService],
-  bootstrap: [AppComponent]
-  
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserAnimationsModule,
+        FormsModule,
+        StoreModule.forRoot(fromApp.appReduer),
+        EffectsModule.forRoot([AuthEffects, RecipeEffects]),
+        StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+        StoreRouterConnectingModule.forRoot(),
+        AppRoutingModule,
+        SharedModule,
+        CoreModule], providers: [LoggingService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
